@@ -18,7 +18,7 @@ body {
 /* رفع الدائرة للأعلى */
 .circle-wrapper {
     position: absolute;
-    top: 28%; /* تم رفعها من 32% إلى 28% */
+    top: 20%; /* تم رفعها من 32% إلى 28% */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 270px;
