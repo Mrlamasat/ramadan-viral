@@ -2,7 +2,7 @@ const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicControl");
 const musicIcon = document.getElementById("musicIcon");
 
-// 1. تساقط الأهلة
+// 1. الأهلة
 function createCrescent() {
     const crescent = document.createElement('div');
     crescent.classList.add('crescent');
@@ -14,7 +14,7 @@ function createCrescent() {
 }
 setInterval(createCrescent, 700);
 
-// 2. التحكم بالصوت
+// 2. الصوت
 function toggleMusic() {
     if (bgMusic.paused) {
         bgMusic.play();
@@ -26,7 +26,7 @@ function toggleMusic() {
 }
 musicBtn.addEventListener("click", toggleMusic);
 
-// 3. تحديث العرض النصي
+// 3. عرض النص المعدل
 function updateDisplay() {
     const params = new URLSearchParams(window.location.search);
     const fromName = params.get("from");
@@ -38,6 +38,7 @@ function updateDisplay() {
     if (fromName && toName) {
         const cleanFrom = fromName.replace(/-/g, ' ');
         const cleanTo = toName.replace(/-/g, ' ');
+        // التعديل المطلوب: مني أنا [المرسل] إلى
         fromText.textContent = `مني أنا ${cleanFrom} إلى`;
         toNameGlow.textContent = cleanTo;
     } else {
@@ -47,20 +48,19 @@ function updateDisplay() {
 }
 window.onload = updateDisplay;
 
-// 4. صناعة الرابط ومشاركة الواتساب (SEO Optimized)
+// 4. المشاركة
 document.getElementById("createBtn").addEventListener("click", function() {
     const input = document.getElementById("userName");
     const params = new URLSearchParams(window.location.search);
     let newTo = input.value.trim();
     if (!newTo) { alert("اكتب اسم الشخص"); return; }
 
-    const myNameFromUrl = params.get("to") || "محب-لك";
-    const cleanFrom = myNameFromUrl.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
+    const currentTo = params.get("to") || "محب-لك";
+    const cleanFrom = currentTo.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
     const cleanTo = newTo.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
 
     const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(cleanFrom)}&to=${encodeURIComponent(cleanTo)}`;
-    
-    const message = `🌙 تهنئة رمضان 2026 خاصة!\nمني أنا ${myNameFromUrl.replace(/-/g,' ')} إلى ${newTo}\nشاهدها هنا 👇\n${shareUrl}`;
+    const message = `🌙 تهنئة رمضان 2026 خاصة!\nمني أنا ${currentTo.replace(/-/g,' ')} إلى ${newTo}\nشاهدها هنا 👇\n${shareUrl}`;
     
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
 });
