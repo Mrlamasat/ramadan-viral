@@ -24,27 +24,45 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-.circle-content {
+/* الدائرة */
+.circle-wrapper {
     position: absolute;
     top: 28%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 85%;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-#titleText {
-    font-size: 1.5em;
-}
-
-#fromToText {
-    margin-top: 10px;
-    font-size: 1.2em;
+/* النصوص التلقائية */
+.auto-font {
+    display: inline-block;
+    width: 90%;
+    max-height: 70%;
+    text-align: center;
+    overflow: hidden;
+    font-size: 2em;
+    line-height: 1.2;
 }
 
 #nameInCircle {
-    margin-top: 10px;
-    font-size: 2em;
     font-weight: bold;
     animation: glow 3s infinite;
 }
