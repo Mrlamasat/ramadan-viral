@@ -2,7 +2,7 @@ const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicControl");
 const musicIcon = document.getElementById("musicIcon");
 
-// 1. تساقط الأهلة
+// 1. تساقط الأهلة المستمر (يعمل تلقائياً)
 function createCrescent() {
     const container = document.getElementById('crescent-container');
     const crescent = document.createElement('div');
@@ -19,19 +19,26 @@ function createCrescent() {
 }
 setInterval(createCrescent, 700);
 
-// 2. التحكم بالصوت
+// 2. إدارة الصوت
 function toggleMusic() {
     if (bgMusic.paused) {
         bgMusic.play();
-        musicIcon.textContent = "🔊";
+        musicIcon.textContent = "🔊 إيقاف الأجواء";
     } else {
         bgMusic.pause();
-        musicIcon.textContent = "🔇";
+        musicIcon.textContent = "🔇 تشغيل الأجواء الرمضانية";
     }
 }
 musicBtn.addEventListener("click", toggleMusic);
 
-// 3. عرض الأسماء (تهنئة رمضان بالاسم)
+// محاولة التشغيل عند أول نقرة في الصفحة لضمان عمل الصوت
+document.body.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => musicIcon.textContent = "🔊 إيقاف الأجواء");
+    }
+}, { once: true });
+
+// 3. عرض الأسماء من الرابط (SEO & Personalization)
 function sanitizeName(name) {
     return name.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
 }
@@ -39,35 +46,38 @@ function sanitizeName(name) {
 function updateDisplay() {
     const params = new URLSearchParams(window.location.search);
     const fromName = params.get("from");
+    const toName = params.get("to");
+    
     const fromToText = document.getElementById("fromToText");
-    const nameCircle = document.getElementById("nameInCircle");
-    const viralHint = document.getElementById("viralHint");
 
-    if (fromName) {
+    if (fromName && toName) {
         const cleanFrom = fromName.replace(/-/g, ' ');
-        fromToText.textContent = `من ${cleanFrom} إلى أنت`;
-        nameCircle.textContent = "🌙 رمضان كريم 🌙";
-        viralHint.textContent = "🔥 أرسلها الآن لشخص آخر!";
+        const cleanTo = toName.replace(/-/g, ' ');
+        fromToText.textContent = `من ${cleanFrom} إلى ${cleanTo}`;
     } else {
         fromToText.textContent = "تهنئة رمضان خاصة لك";
-        nameCircle.textContent = "🌙 رمضان كريم 🌙";
-        viralHint.textContent = "اكتب اسم صديقك بالأسفل 👇";
     }
 }
 
 window.onload = updateDisplay;
 
-// 4. السيطرة على واتساب وجوجل
+// 4. إنشاء التهنئة الجديدة والمشاركة
 document.getElementById("createBtn").addEventListener("click", function() {
     const input = document.getElementById("userName");
+    const params = new URLSearchParams(window.location.search);
+    
     let newTo = input.value.trim();
     if (!newTo) { alert("يرجى كتابة اسم الشخص"); return; }
 
-    const cleanNewTo = sanitizeName(newTo);
-    const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(cleanNewTo)}`;
+    // الشخص المستلم حالياً يصبح هو المرسل للشخص الجديد
+    const currentReceiver = params.get("to") || "محب-لك";
+    const cleanFrom = sanitizeName(currentReceiver);
+    const cleanTo = sanitizeName(newTo);
+
+    const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(cleanFrom)}&to=${encodeURIComponent(cleanTo)}`;
     
-    // رسالة غنية بكلمات البحث (SEO)
-    const message = `🌙 تهنئة رمضان 2026 خاصة باسمك!\nوصلتك تبريكات رمضان من أحد المحبين، شاهدها وصمم تهنئة رمضان بالاسم من هنا 👇\n${shareUrl}`;
+    // رسالة واتساب قوية للـ SEO والانتشار
+    const message = `🌙 تهنئة رمضان 2026 خاصة باسمك!\nمن ${currentReceiver.replace(/-/g,' ')} إلى ${newTo}\nشاهدها وصمم تهنئتك الخاصة من هنا 👇\n${shareUrl}`;
     
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
 });
