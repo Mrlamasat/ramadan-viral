@@ -3,7 +3,7 @@ let takbeerSound = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-
 document.getElementById("createBtn").addEventListener("click", handleAction);
 
 // دالة ضبط حجم الخط تلقائيًا
-function adjustFontSize(element, maxFont = 1.5, minFont = 0.5) {
+function adjustFontSize(element, maxFont = 1.2, minFont = 0.4) {
     const parent = element.parentElement;
     let fontSize = maxFont;
     element.style.fontSize = fontSize + "em";
