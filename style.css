@@ -1,6 +1,7 @@
 :root {
     --gold: #f5e6d1;
     --dark: #1a1a1a;
+    --beige: #f5f5dc; /* لون البيج المطلوبة */
 }
 
 body {
@@ -14,7 +15,7 @@ body {
     overflow: hidden;
 }
 
-/* رفع الدائرة للأعلى قليلاً */
+/* رفع الدائرة */
 .circle-wrapper {
     position: absolute;
     top: 32%; 
@@ -39,60 +40,51 @@ body {
     box-sizing: border-box;
 }
 
-/* الاسم المتوهج العريض والبارز */
+/* تغيير لون جميع النصوص داخل الدائرة إلى البيج */
+.auto-font {
+    color: var(--beige) !important;
+    margin: 5px 0;
+}
+
+/* الاسم المتوهج العريض */
 .glowing-name {
     font-size: 2.1em;
     font-weight: 900;
-    color: #ffffff;
+    color: #ffffff; /* أبيض ليزداد التوهج */
     text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
     margin: 5px 0;
     animation: glow-pulse 1.5s infinite alternate;
 }
 
 @keyframes glow-pulse {
-    from { transform: scale(1); text-shadow: 0 0 10px #ffd700; }
+    from { transform: scale(1); }
     to { transform: scale(1.08); text-shadow: 0 0 20px #fff, 0 0 40px #ffd700; }
 }
 
-/* زر الصوت تحت الدائرة */
-.music-btn-under-circle {
+/* رفع زر الصوت للأعلى (تحت الدائرة مباشرة) */
+.music-btn-raised {
     position: absolute;
-    top: 55%; /* يتم وضعه تحت الدائرة مباشرة */
+    top: 54%; /* رفعناه أكثر للأعلى */
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 18px;
     background: rgba(75, 42, 17, 0.9);
     border: 1px solid var(--gold);
     border-radius: 25px;
-    color: var(--gold);
+    color: var(--beige);
     cursor: pointer;
     z-index: 100;
     font-size: 13px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     white-space: nowrap;
 }
 
-#inputSection {
-    position: absolute;
-    bottom: 35px;
-    width: 100%;
-    text-align: center;
-}
-
-/* حبل اللمبات والأهلة */
+/* باقي التنسيقات */
+#cardContainer { position: relative; width: 360px; height: 640px; border-radius: 20px; background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat; z-index: 10; }
+#inputSection { position: absolute; bottom: 35px; width: 100%; text-align: center; }
+#userName { width: 80%; padding: 12px; border-radius: 10px; border: none; text-align: center; font-family: 'Almarai'; }
+#createBtn { margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; background: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
 .lights-string { position: absolute; top: 0; width: 100%; display: flex; justify-content: space-around; padding: 10px 0; }
 .lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
 @keyframes blink { from { opacity: 0.3; } to { opacity: 1; filter: drop-shadow(0 0 10px gold); } }
-
 .crescent { position: absolute; color: var(--gold); animation: fall linear forwards; }
 @keyframes fall { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(110vh); opacity: 0; } }
-
-#cardContainer {
-    position: relative;
-    width: 360px; height: 640px;
-    border-radius: 20px;
-    background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
-    z-index: 10;
-}
-#userName { width: 80%; padding: 12px; border-radius: 10px; border: none; text-align: center; }
-#createBtn { margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; background: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
