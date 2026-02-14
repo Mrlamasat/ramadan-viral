@@ -95,3 +95,23 @@ body {
 .lights-string { position: absolute; top: 0; width: 100%; display: flex; justify-content: space-around; padding: 10px 0; }
 .lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
 @keyframes blink { from { opacity: 0.3; } to { opacity: 1; filter: drop-shadow(0 0 10px gold); } }
+
+.visitor-counter {
+    position: absolute;
+    bottom: 100px; /* مكانه فوق حقل الإدخال */
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--beige); /* اللون البيج الذي اخترته */
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 15px;
+    white-space: nowrap;
+    border: 1px solid rgba(245, 230, 209, 0.2);
+}
+
+#count {
+    font-weight: bold;
+    color: #ffd700; /* جعل الرقم يميل للذهبي ليبرز */
+}
+
