@@ -68,3 +68,25 @@ document.getElementById("createBtn").addEventListener("click", function() {
     
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
 });
+// دالة عداد الزيارات
+function updateVisitorCounter() {
+    const startValue = 144250;
+    let currentVisits = localStorage.getItem('visitCount');
+
+    if (!currentVisits) {
+        // إذا كانت أول مرة، ابدأ من الرقم المحدد
+        currentVisits = startValue;
+    } else {
+        // زيادة الزيارات في كل مرة يفتح فيها الرابط
+        currentVisits = parseInt(currentVisits) + 1;
+    }
+
+    // حفظ القيمة الجديدة في متصفح المستخدم
+    localStorage.setItem('visitCount', currentVisits);
+    
+    // عرض الرقم في الصفحة
+    document.getElementById('count').innerText = currentVisits.toLocaleString();
+}
+
+// تشغيل العداد عند تحميل الصفحة
+window.addEventListener('load', updateVisitorCounter);
