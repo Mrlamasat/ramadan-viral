@@ -98,20 +98,15 @@ body {
 
 .visitor-counter {
     position: absolute;
-    bottom: 100px; /* مكانه فوق حقل الإدخال */
+    bottom: 110px; /* يتحكم في الارتفاع عن أسفل البطاقة */
     left: 50%;
     transform: translateX(-50%);
-    color: var(--beige); /* اللون البيج الذي اخترته */
-    font-size: 14px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 5px 15px;
-    border-radius: 15px;
+    color: #f5f5dc; /* اللون البيج */
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 12px;
+    border-radius: 20px;
+    z-index: 100; /* لضمان ظهوره فوق صورة الخلفية */
+    border: 1px solid rgba(245, 230, 209, 0.3);
     white-space: nowrap;
-    border: 1px solid rgba(245, 230, 209, 0.2);
 }
-
-#count {
-    font-weight: bold;
-    color: #ffd700; /* جعل الرقم يميل للذهبي ليبرز */
-}
-
