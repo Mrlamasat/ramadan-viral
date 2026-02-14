@@ -2,7 +2,12 @@ let takbeerSound = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-
 
 document.getElementById("createBtn").addEventListener("click", handleAction);
 
-// دالة ضبط حجم الخط تلقائيًا
+// دالة لتنظيف الاسم واستبدال المسافات بـ -
+function sanitizeName(name) {
+    return name.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
+}
+
+// ضبط حجم الخط تلقائيًا
 function adjustFontSize(element, maxFont = 1.2, minFont = 0.4) {
     const parent = element.parentElement;
     let fontSize = maxFont;
@@ -26,12 +31,13 @@ function handleAction() {
         return;
     }
 
-    newTo = newTo.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '');
-    const params = new URLSearchParams(window.location.search);
-    const currentTo = params.get("to");
-    const newFrom = currentTo || "شخص يحبك ❤️";
+    newTo = sanitizeName(newTo);
 
-    fromToText.textContent = `من ${newFrom} إلى ${newTo}`;
+    const params = new URLSearchParams(window.location.search);
+    const currentTo = params.get("from"); // الشخص الذي أرسل
+    const newFrom = currentTo ? sanitizeName(currentTo) : "شخص-يحبك";
+
+    fromToText.textContent = `من ${newFrom.replace(/-/g,' ')} إلى ${newTo.replace(/-/g,' ')}`;
     nameCircle.textContent = "🌙 رمضان كريم 🌙";
     viralHint.textContent = "🎁 اكتب اسم شخص آخر وواصل السلسلة!";
 
@@ -42,12 +48,13 @@ function handleAction() {
 
     takbeerSound.play();
 
-    const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(newFrom)}&to=${encodeURIComponent(newTo)}`;
+    // الرابط القصير والأنيق
+    const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(newTo)}`;
     window.history.replaceState(null, '', shareUrl);
 
     const message =
 `🚨 وصلك تهنئة رمضان خاصة!
-من ${newFrom} إلى ${newTo} 🌙
+من ${newFrom.replace(/-/g,' ')} إلى ${newTo.replace(/-/g,' ')} 🌙
 اضغط وشوفها 👇
 ${shareUrl}`;
 
@@ -60,14 +67,15 @@ ${shareUrl}`;
 window.onload = function() {
     const params = new URLSearchParams(window.location.search);
     const from = params.get("from");
-    const to = params.get("to");
 
-    if (from && to) {
+    if (from) {
         const fromToText = document.getElementById("fromToText");
         const nameCircle = document.getElementById("nameInCircle");
         const viralHint = document.getElementById("viralHint");
 
-        fromToText.textContent = `من ${from} إلى ${to}`;
+        const cleanFrom = from.replace(/-/g,' ');
+
+        fromToText.textContent = `من ${cleanFrom} إلى أنت`;
         nameCircle.textContent = "🌙 رمضان كريم 🌙";
         viralHint.textContent = "🔥 الآن ارسلها لشخص آخر!";
 

@@ -49,7 +49,8 @@ body {
     padding: 12px 8px;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: rgba(75, 42, 17, 0.8); /* بني غامق مع شفافية */
+    background-color: rgba(75, 42, 17, 0.8); /* بني غامق خلف النص */
+    border: 2px solid rgba(245, 230, 209, 0.6); /* إطار خفيف */
 }
 
 /* النصوص التلقائية */
@@ -62,7 +63,7 @@ body {
     line-height: 1.1;
     white-space: pre-wrap;
     word-break: break-word;
-    font-size: 1.2em; /* حجم أصغر بشكل افتراضي */
+    font-size: 1.2em; /* حجم أصغر */
     font-family: 'Almarai', sans-serif;
 }
 
