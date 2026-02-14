@@ -98,7 +98,7 @@ body {
 
 .visitor-counter {
     position: absolute;
-    bottom: 600px; /* يتحكم في الارتفاع عن أسفل البطاقة */
+    bottom: 700px; /* يتحكم في الارتفاع عن أسفل البطاقة */
     left: 50%;
     transform: translateX(-50%);
     color: #f5f5dc; /* اللون البيج */
