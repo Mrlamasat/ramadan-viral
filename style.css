@@ -12,6 +12,7 @@ body {
     align-items: center;
     height: 100vh;
     color: var(--gold);
+    overflow: hidden;
 }
 
 #cardContainer {
@@ -22,9 +23,53 @@ body {
     overflow: hidden;
     background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    z-index: 10; /* فوق الأهلة */
 }
 
-/* الدائرة */
+/* زر الصوت */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background: rgba(75, 42, 17, 0.8);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+/* الأهلة المتساقطة */
+#crescent-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.crescent {
+    position: absolute;
+    color: var(--gold);
+    user-select: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* باقي تنسيقاتك الأصلية */
 .circle-wrapper {
     position: absolute;
     top: 28%;
@@ -48,40 +93,19 @@ body {
     text-align: center;
     padding: 12px 8px;
     box-sizing: border-box;
-    overflow: hidden;
-    background-color: rgba(75, 42, 17, 0.8); /* بني غامق خلف النص */
-    border: 2px solid rgba(245, 230, 209, 0.6); /* إطار خفيف */
+    background-color: rgba(75, 42, 17, 0.8);
+    border: 2px solid rgba(245, 230, 209, 0.6);
 }
 
-/* النصوص التلقائية */
 .auto-font {
     display: block;
     width: 100%;
     max-height: 100%;
     text-align: center;
-    overflow: hidden;
     line-height: 1.1;
     white-space: pre-wrap;
     word-break: break-word;
-    font-size: 1.2em; /* حجم أصغر */
-    font-family: 'Almarai', sans-serif;
-}
-
-#nameInCircle {
-    font-weight: bold;
-    animation: glow 3s infinite;
-}
-
-@keyframes glow {
-    0% { text-shadow: 0 0 5px gold; }
-    50% { text-shadow: 0 0 20px #ffd700; }
-    100% { text-shadow: 0 0 5px gold; }
-}
-
-#viralHint {
-    margin-top: 10px;
-    font-size: 0.9em;
-    opacity: 0.8;
+    font-size: 1.2em;
 }
 
 #inputSection {
@@ -97,7 +121,6 @@ body {
     border-radius: 10px;
     border: none;
     text-align: center;
-    font-family: 'Almarai', sans-serif;
 }
 
 #createBtn {
@@ -110,14 +133,4 @@ body {
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
 }
-
-#createBtn:hover {
-    transform: scale(1.05);
-}
-
-/* أقصى ارتفاع لكل نص */
-#nameInCircle { max-height: 35%; }
-#fromToText { max-height: 25%; }
-#viralHint { max-height: 15%; }
