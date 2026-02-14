@@ -1,45 +1,87 @@
+let takbeerSound = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
+
+document.getElementById("createBtn").addEventListener("click", handleAction);
+
+// دالة لتنظيف الاسم واستبدال المسافات بـ -
+function sanitizeName(name) {
+    return name.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
+}
+
+// ضبط حجم الخط تلقائيًا
+function adjustFontSize(element, maxFont = 1.2, minFont = 0.4) {
+    const parent = element.parentElement;
+    let fontSize = maxFont;
+    element.style.fontSize = fontSize + "em";
+
+    while ((element.scrollHeight > parent.clientHeight * 0.95 || element.scrollWidth > parent.clientWidth * 0.95) && fontSize > minFont) {
+        fontSize -= 0.02;
+        element.style.fontSize = fontSize + "em";
+    }
+}
+
 function handleAction() {
     const input = document.getElementById("userName");
-    let recipientAr = input.value.trim(); // الاسم بالعربي للإرسال
-    
-    if (!recipientAr) {
+    const fromToText = document.getElementById("fromToText");
+    const nameCircle = document.getElementById("nameInCircle");
+    const viralHint = document.getElementById("viralHint");
+
+    let newTo = input.value.trim();
+    if (!newTo) {
         alert("اكتب اسم الشخص الذي تريد تهنئته");
         return;
     }
 
-    // تحويل الاسم العربي إلى إنجليزي بسيط للرابط فقط (إزالة المسافات)
-    // ملاحظة: الرابط سيعتمد على كلمة "Ramadan-Gift" بدلاً من الرموز
-    const linkName = "special-guest"; 
+    newTo = sanitizeName(newTo);
 
     const params = new URLSearchParams(window.location.search);
-    const senderAr = params.get("name") || "شخص يحبك";
+    const currentTo = params.get("from"); // الشخص الذي أرسل
+    const newFrom = currentTo ? sanitizeName(currentTo) : "شخص-يحبك";
 
-    // الرابط الآن أصبح إنجليزي بالكامل ولا يحتوي على رموز %
-    const shareUrl = `${window.location.origin}${window.location.pathname}?to=${linkName}`;
+    fromToText.textContent = `من ${newFrom.replace(/-/g,' ')} إلى ${newTo.replace(/-/g,' ')}`;
+    nameCircle.textContent = "🌙 رمضان كريم 🌙";
+    viralHint.textContent = "🎁 اكتب اسم شخص آخر وواصل السلسلة!";
 
-    // الرسالة في واتساب تظل عربية وجميلة
-    const message = 
-`🎁 وصلتك تهنئة رمضان خاصة
-من: ${senderAr}
-إلى: ${recipientAr} 🌙 ✨
+    adjustFontSize(document.getElementById("titleText"));
+    adjustFontSize(fromToText);
+    adjustFontSize(nameCircle);
+    adjustFontSize(viralHint);
 
-افتح الرابط وشوف مفاجأتك 👇
+    takbeerSound.play();
+
+    // الرابط القصير والأنيق
+    const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(newTo)}`;
+    window.history.replaceState(null, '', shareUrl);
+
+    const message =
+`🚨 وصلك تهنئة رمضان خاصة!
+من ${newFrom.replace(/-/g,' ')} إلى ${newTo.replace(/-/g,' ')} 🌙
+اضغط وشوفها 👇
 ${shareUrl}`;
 
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
+
     input.value = "";
 }
 
 window.onload = function() {
     const params = new URLSearchParams(window.location.search);
-    const toParam = params.get("to");
+    const from = params.get("from");
 
-    if (toParam === "special-guest") {
-        // بما أن الرابط إنجليزي ثابت، سنعرض رسالة ترحيب عامة راقية
-        document.getElementById("fromToText").textContent = `تهنئة خاصة`;
-        document.getElementById("nameInCircle").textContent = `🌙 رمضان كريم 🌙`;
-        
-        document.getElementById("viralHint").textContent = "🔥 اكتب اسم صديقك وأرسلها له!";
+    if (from) {
+        const fromToText = document.getElementById("fromToText");
+        const nameCircle = document.getElementById("nameInCircle");
+        const viralHint = document.getElementById("viralHint");
+
+        const cleanFrom = from.replace(/-/g,' ');
+
+        fromToText.textContent = `من ${cleanFrom} إلى أنت`;
+        nameCircle.textContent = "🌙 رمضان كريم 🌙";
+        viralHint.textContent = "🔥 الآن ارسلها لشخص آخر!";
+
+        adjustFontSize(document.getElementById("titleText"));
+        adjustFontSize(fromToText);
+        adjustFontSize(nameCircle);
+        adjustFontSize(viralHint);
     }
 };
