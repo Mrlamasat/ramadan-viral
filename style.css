@@ -1,0 +1,95 @@
+:root {
+    --gold: #f5e6d1;
+    --dark: #1a1a1a;
+}
+
+body {
+    margin: 0;
+    background: var(--dark);
+    font-family: 'Amiri', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: var(--gold);
+}
+
+#cardContainer {
+    position: relative;
+    width: 360px;
+    height: 640px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.circle-content {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    text-align: center;
+}
+
+#titleText {
+    font-size: 1.5em;
+}
+
+#fromToText {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+#nameInCircle {
+    margin-top: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    animation: glow 3s infinite;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px gold; }
+    50% { text-shadow: 0 0 20px #ffd700; }
+    100% { text-shadow: 0 0 5px gold; }
+}
+
+#viralHint {
+    margin-top: 10px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+#inputSection {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    text-align: center;
+}
+
+#userName {
+    width: 80%;
+    padding: 6px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    font-family: 'Amiri', serif;
+}
+
+#createBtn {
+    margin-top: 8px;
+    width: 80%;
+    padding: 6px;
+    border-radius: 12px;
+    border: none;
+    background: #25D366;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#createBtn:hover {
+    transform: scale(1.05);
+}
