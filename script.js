@@ -1,4 +1,18 @@
+let takbeerSound = new Audio("https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3");
+
 document.getElementById("createBtn").addEventListener("click", handleAction);
+
+// دالة ضبط حجم الخط تلقائيًا
+function adjustFontSize(element, maxFont = 2.5, minFont = 0.6) {
+    const parent = element.parentElement;
+    let fontSize = maxFont;
+    element.style.fontSize = fontSize + "em";
+
+    while ((element.scrollHeight > parent.clientHeight * 0.95 || element.scrollWidth > parent.clientWidth * 0.95) && fontSize > minFont) {
+        fontSize -= 0.05;
+        element.style.fontSize = fontSize + "em";
+    }
+}
 
 function handleAction() {
     const input = document.getElementById("userName");
@@ -13,7 +27,6 @@ function handleAction() {
     }
 
     newTo = newTo.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '');
-
     const params = new URLSearchParams(window.location.search);
     const currentTo = params.get("to");
     const newFrom = currentTo || "شخص يحبك ❤️";
@@ -21,6 +34,13 @@ function handleAction() {
     fromToText.textContent = `من ${newFrom} إلى ${newTo}`;
     nameCircle.textContent = "🌙 رمضان كريم 🌙";
     viralHint.textContent = "🎁 اكتب اسم شخص آخر وواصل السلسلة!";
+
+    adjustFontSize(document.getElementById("titleText"));
+    adjustFontSize(fromToText);
+    adjustFontSize(nameCircle);
+    adjustFontSize(viralHint);
+
+    takbeerSound.play();
 
     const shareUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(newFrom)}&to=${encodeURIComponent(newTo)}`;
     window.history.replaceState(null, '', shareUrl);
@@ -43,9 +63,17 @@ window.onload = function() {
     const to = params.get("to");
 
     if (from && to) {
-        document.getElementById("fromToText").textContent = `من ${from} إلى ${to}`;
-        document.getElementById("nameInCircle").textContent = "🌙 رمضان كريم 🌙";
-        document.getElementById("viralHint").textContent =
-        "🔥 الآن أرسلها لشخص آخر قبل أن يفوت رمضان!";
+        const fromToText = document.getElementById("fromToText");
+        const nameCircle = document.getElementById("nameInCircle");
+        const viralHint = document.getElementById("viralHint");
+
+        fromToText.textContent = `من ${from} إلى ${to}`;
+        nameCircle.textContent = "🌙 رمضان كريم 🌙";
+        viralHint.textContent = "🔥 الآن ارسلها لشخص آخر!";
+
+        adjustFontSize(document.getElementById("titleText"));
+        adjustFontSize(fromToText);
+        adjustFontSize(nameCircle);
+        adjustFontSize(viralHint);
     }
 };
