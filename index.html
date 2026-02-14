@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎁 تهنئة رمضان خاصة لك</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 تهنئة رمضان خاصة لك</title>
 
-<!-- WhatsApp Preview -->
-<meta property="og:title" content="🎁 وصلك تهنئة رمضان خاصة باسمك!">
-<meta property="og:description" content="افتح الرابط وشاهد التهنئة الخاصة بك 🌙✨">
-<meta property="og:image" content="https://i.imgur.com/4tD90fX.jpeg">
-<meta property="og:type" content="website">
+    <meta property="og:title" content="🎁 وصلك تهنئة رمضان خاصة باسمك!">
+    <meta property="og:description" content="افتح الرابط وشاهد التهنئة الخاصة بك 🌙✨">
+    <meta property="og:image" content="https://i.imgur.com/4tD90fX.jpeg">
+    <meta property="og:type" content="website">
 
-<!-- خط العربية -->
-<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="cardContainer">
+    <div id="crescent-container"></div>
 
-    <div class="circle-wrapper">
-        <div class="circle">
-            <div id="titleText" class="auto-font">🎁 تهنئة رمضان خاصة</div>
-            <div id="fromToText" class="auto-font"></div>
-            <div id="nameInCircle" class="auto-font"></div>
-            <div id="viralHint" class="auto-font"></div>
+    <div id="musicControl" class="music-btn">
+        <span id="musicIcon">🔇</span>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="Mohsen.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="cardContainer">
+        <div class="circle-wrapper">
+            <div class="circle">
+                <div id="titleText" class="auto-font">🎁 تهنئة رمضان خاصة</div>
+                <div id="fromToText" class="auto-font"></div>
+                <div id="nameInCircle" class="auto-font"></div>
+                <div id="viralHint" class="auto-font"></div>
+            </div>
+        </div>
+
+        <div id="inputSection">
+            <input type="text" id="userName" placeholder="اكتب اسم الشخص التالي">
+            <button id="createBtn">أرسلها الآن 📲</button>
         </div>
     </div>
 
-    <div id="inputSection">
-        <input type="text" id="userName" placeholder="اكتب اسم الشخص التالي">
-        <button id="createBtn">أرسلها الآن 📲</button>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
