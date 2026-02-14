@@ -61,7 +61,7 @@ body {
 /* وضع زر الصوت في المساحة العلوية الفارغة */
 .music-btn-top-area {
     position: absolute;
-    top: 10px; /* تحت اللمبات مباشرة */
+    top: -20px; /* تحت اللمبات مباشرة */
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 15px;
