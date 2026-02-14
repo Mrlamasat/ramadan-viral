@@ -14,99 +14,85 @@ body {
     overflow: hidden;
 }
 
-/* مشغل الصوت الموسط بالأسفل */
-.music-btn-bottom {
+/* رفع الدائرة للأعلى قليلاً */
+.circle-wrapper {
     position: absolute;
-    bottom: 125px; /* يظهر فوق حقل الإدخال مباشرة */
+    top: 32%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 270px;
+    height: 270px;
+}
+
+.circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(75, 42, 17, 0.85);
+    border: 2px solid var(--gold);
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* الاسم المتوهج العريض والبارز */
+.glowing-name {
+    font-size: 2.1em;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+    margin: 5px 0;
+    animation: glow-pulse 1.5s infinite alternate;
+}
+
+@keyframes glow-pulse {
+    from { transform: scale(1); text-shadow: 0 0 10px #ffd700; }
+    to { transform: scale(1.08); text-shadow: 0 0 20px #fff, 0 0 40px #ffd700; }
+}
+
+/* زر الصوت تحت الدائرة */
+.music-btn-under-circle {
+    position: absolute;
+    top: 55%; /* يتم وضعه تحت الدائرة مباشرة */
     left: 50%;
     transform: translateX(-50%);
-    padding: 10px 20px;
+    padding: 8px 18px;
     background: rgba(75, 42, 17, 0.9);
     border: 1px solid var(--gold);
-    border-radius: 30px;
+    border-radius: 25px;
     color: var(--gold);
     cursor: pointer;
     z-index: 100;
     font-size: 13px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     white-space: nowrap;
 }
 
-/* حبل اللمبات المضيئة */
-.lights-string {
+#inputSection {
     position: absolute;
-    top: 0; width: 100%;
-    display: flex; justify-content: space-around;
-    padding: 10px 0; z-index: 20;
+    bottom: 35px;
+    width: 100%;
+    text-align: center;
 }
 
-.lights-string span {
-    font-size: 20px;
-    animation: blink 1.5s infinite alternate;
-}
+/* حبل اللمبات والأهلة */
+.lights-string { position: absolute; top: 0; width: 100%; display: flex; justify-content: space-around; padding: 10px 0; }
+.lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
+@keyframes blink { from { opacity: 0.3; } to { opacity: 1; filter: drop-shadow(0 0 10px gold); } }
 
-@keyframes blink {
-    from { opacity: 0.3; filter: grayscale(1); transform: scale(0.9); }
-    to { opacity: 1; filter: drop-shadow(0 0 10px gold); transform: scale(1.1); }
-}
+.crescent { position: absolute; color: var(--gold); animation: fall linear forwards; }
+@keyframes fall { 0% { transform: translateY(-50px); opacity: 0; } 100% { transform: translateY(110vh); opacity: 0; } }
 
 #cardContainer {
     position: relative;
     width: 360px; height: 640px;
     border-radius: 20px;
     background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     z-index: 10;
 }
-
-#crescent-container {
-    position: fixed; top: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 1;
-}
-
-.crescent {
-    position: absolute; color: var(--gold);
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-.circle-wrapper {
-    position: absolute;
-    top: 35%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 270px; height: 270px;
-}
-
-.circle {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background-color: rgba(75, 42, 17, 0.85);
-    border: 2px solid var(--gold);
-    text-align: center; padding: 20px;
-    box-sizing: border-box;
-}
-
-.auto-font { width: 100%; margin: 5px 0; color: var(--gold); word-wrap: break-word; }
-
-#inputSection {
-    position: absolute;
-    bottom: 35px; width: 100%;
-    text-align: center;
-}
-
-#userName { 
-    width: 80%; padding: 12px; border-radius: 10px; border: none; 
-    text-align: center; font-family: 'Almarai'; margin-bottom: 8px;
-}
-
-#createBtn { 
-    width: 80%; padding: 12px; border-radius: 12px; background: #25D366; 
-    color: white; border: none; cursor: pointer; font-weight: bold; font-size: 16px;
-}
+#userName { width: 80%; padding: 12px; border-radius: 10px; border: none; text-align: center; }
+#createBtn { margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; background: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
