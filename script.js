@@ -30,19 +30,35 @@ function initializePage() {
         const cleanTo = toName.replace(/-/g, ' ');
         fromText.textContent = `مني أنا ${cleanFrom} إلى`;
         toNameGlow.textContent = cleanTo;
-        // تغيير العنوان لـ SEO
         document.title = `تهنئة رمضان 2026 من ${cleanFrom} إلى ${cleanTo}`;
     } else {
         fromText.textContent = "تهنئة رمضان خاصة";
         toNameGlow.textContent = "لك ولأحبابك";
     }
 
-    // عداد الزيارات
+    // --- نظام العداد المطور ---
     const startValue = 144250;
-    let currentVisits = localStorage.getItem('visitCount') || startValue;
-    currentVisits = parseInt(currentVisits) + 1;
+    let currentVisits = localStorage.getItem('visitCount');
+
+    // إذا لم يوجد قيمة سابقة أو القيمة المسجلة أقل من رقم البداية، ابدأ من startValue
+    if (!currentVisits || parseInt(currentVisits) < startValue) {
+        currentVisits = startValue;
+    } else {
+        currentVisits = parseInt(currentVisits) + 1;
+    }
+
+    // حفظ وعرض القيمة فوراً
     localStorage.setItem('visitCount', currentVisits);
-    document.getElementById('count').innerText = currentVisits.toLocaleString();
+    const countDisplay = document.getElementById('count');
+    countDisplay.innerText = currentVisits.toLocaleString();
+
+    // جعل العداد "ينبض" بالحياة (يزيد عشوائياً كل بضع ثوانٍ أمام الزائر)
+    setInterval(() => {
+        let randomPlus = Math.floor(Math.random() * 3) + 1; // زيادة بـ 1 أو 2 أو 3
+        currentVisits = parseInt(currentVisits) + randomPlus;
+        countDisplay.innerText = currentVisits.toLocaleString();
+        localStorage.setItem('visitCount', currentVisits);
+    }, 3500); // يتحدث كل 3.5 ثانية
 }
 
 window.onload = initializePage;
