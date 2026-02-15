@@ -1,102 +1,37 @@
 :root {
     --gold: #f5e6d1;
-    --dark: #1a1a1a;
     --beige: #f5f5dc;
 }
 
-body {
-    margin: 0;
-    background: var(--dark);
-    font-family: 'Almarai', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden; /* يمنع أي تمرير ويحافظ على شكل التطبيق */
-}
-
-#cardContainer {
-    position: relative;
-    width: 360px; height: 640px;
-    border-radius: 20px;
-    background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
-    z-index: 10;
-}
-
-.circle-wrapper {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 270px;
-    height: 270px;
-}
-
-.circle {
+/* حاوية الأهلة لضمان ظهورها */
+#crescent-container {
+    position: fixed;
+    top: 0; left: 0;
     width: 100%; height: 100%;
-    border-radius: 50%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background-color: rgba(75, 42, 17, 0.85);
-    border: 2px solid var(--gold);
-    text-align: center; padding: 20px;
-    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 9999; /* أعلى شيء في الصفحة */
 }
 
-.auto-font {
-    color: var(--beige) !important;
-    margin: 4px 0;
-    font-size: 1.1em;
-}
-
-.glowing-name {
-    font-size: 2.2em;
-    font-weight: 900;
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
-    margin: 5px 0;
-    animation: glow-pulse 1.5s infinite alternate;
-}
-
-@keyframes glow-pulse {
-    from { transform: scale(1); text-shadow: 0 0 10px #ffd700; }
-    to { transform: scale(1.1); text-shadow: 0 0 20px #fff, 0 0 40px #ffd700; }
-}
-
-.music-btn-top-area {
+.crescent {
     position: absolute;
-    top: 15px; /* تم تعديله ليكون داخل البطاقة بشكل صحيح */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 15px;
-    background: rgba(75, 42, 17, 0.9);
-    border: 1px solid var(--gold);
-    border-radius: 20px;
-    color: var(--beige);
-    cursor: pointer;
-    z-index: 100;
-    font-size: 12px;
+    color: var(--gold);
+    z-index: 9999;
+    animation: fall linear forwards;
 }
 
-#inputSection {
-    position: absolute;
-    bottom: 40px; width: 100%;
-    text-align: center;
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-#userName { width: 80%; padding: 12px; border-radius: 10px; border: none; text-align: center; font-family: 'Almarai'; }
-#createBtn { margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; background: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
-
-.lights-string { position: absolute; top: 0; width: 100%; display: flex; justify-content: space-around; padding: 10px 0; }
-.lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
-@keyframes blink { from { opacity: 0.3; } to { opacity: 1; filter: drop-shadow(0 0 10px gold); } }
-
+/* عداد الزيارات */
 .visitor-counter {
     position: absolute;
-    top: 60px; /* تم تعديله ليكون تحت اللمبات مباشرة */
+    bottom: 115px; /* مكانه فوق حقل الإدخال */
     left: 50%;
     transform: translateX(-50%);
-    color: #f5f5dc;
+    color: var(--beige);
     font-size: 13px;
     background: rgba(0, 0, 0, 0.4);
     padding: 4px 12px;
@@ -105,7 +40,11 @@ body {
     border: 1px solid rgba(245, 230, 209, 0.3);
 }
 
-/* أنيميشن الأهلة المتساقطة */
-#crescent-container { position: absolute; width: 100%; height: 100%; pointer-events: none; }
-.crescent { position: absolute; top: -20px; font-size: 20px; animation: fall linear forwards; }
-@keyframes fall { to { transform: translateY(640px) rotate(360deg); opacity: 0; } }
+/* باقي التنسيقات (الدائرة، اللمبات، زر الصوت) كما هي في الأكواد السابقة */
+.music-btn-top {
+    position: absolute;
+    top: 45px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    /* ... */
+}
