@@ -23,7 +23,7 @@ function initializePage() {
 
     if (toName) {
         const cleanTo = toName.replace(/-/g, ' ');
-        nameInCircle.textContent = `🌙 ${cleanTo} 🌙`;
+        nameInCircle.textContent = `${cleanTo}`;
     } else {
         nameInCircle.textContent = "🌙 رمضان كريم 🌙";
     }
