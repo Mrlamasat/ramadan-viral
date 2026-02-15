@@ -4,119 +4,108 @@
     --beige: #f5f5dc;
 }
 
+/* إعدادات الجسم لضمان التوسط الكامل */
 body {
     margin: 0;
+    padding: 0;
     background: var(--dark);
     font-family: 'Almarai', sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: center; /* توسيط أفقي */
+    align-items: center;     /* توسيط عمودي */
+    min-height: 100vh;
     overflow: hidden;
-    direction: rtl; /* ضمان اتجاه النص من اليمين لليسار */
+    direction: rtl;
 }
 
+/* حاوية البطاقة الرئيسية */
 #cardContainer {
     position: relative;
-    width: 360px;
+    width: 360px; 
     height: 640px;
-    border-radius: 20px;
     background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
-    z-index: 10;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-    display: flex; /* لضمان توسيط العناصر داخله */
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+    overflow: hidden; /* لمنع خروج العناصر عن الحواف */
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* زر الصوت النابض */
-@keyframes pulse-btn {
-    0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(245, 230, 209, 0.7); }
-    70% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 0 12px rgba(245, 230, 209, 0); }
-    100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(245, 230, 209, 0); }
-}
-
+/* زر الموسيقى - تم تعديله ليكون ثابت التمركز */
 .music-btn-top-area {
     position: absolute;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 18px;
+    padding: 10px 15px;
     background: rgba(75, 42, 17, 0.9);
     border: 2px solid var(--gold);
     border-radius: 25px;
     color: var(--beige);
     cursor: pointer;
     z-index: 100;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
-    animation: pulse-btn 2s infinite;
+    animation: pulse-simple 2s infinite;
     white-space: nowrap;
 }
 
-.music-playing { animation: none !important; background: rgba(37, 211, 102, 0.7) !important; border-color: #fff !important; }
+@keyframes pulse-simple {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
 
-/* الدائرة */
+/* الدائرة المركزية */
 .circle-wrapper {
-    position: absolute;
-    top: 32%; /* ضبط الارتفاع */
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 100px; /* مسافة من الأعلى بدلاً من التموضع المطلق الصعب */
     width: 270px;
     height: 270px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 20;
 }
 
 .circle {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    background-color: rgba(75, 42, 17, 0.85);
+    border: 2px solid var(--gold);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(75, 42, 17, 0.85);
-    border: 2px solid var(--gold);
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
 }
 
-.auto-font { color: var(--beige) !important; margin: 4px 0; font-size: 1.1em; }
+.auto-font { color: var(--beige); margin: 3px 0; font-size: 1.1em; }
 
 .glowing-name {
-    font-size: 2.2em;
+    font-size: 2.1em;
     font-weight: 900;
     color: #ffffff;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+    text-shadow: 0 0 10px #ffd700;
     margin: 5px 0;
-    animation: glow-pulse 1.5s infinite alternate;
 }
 
-@keyframes glow-pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
-
-/* العداد تحت الدائرة مباشرة */
+/* العداد - موقعه تحت الدائرة */
 .visitor-counter {
-    position: absolute;
-    top: 55%; /* تحت الدائرة */
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 15px;
     color: var(--beige);
-    font-size: 14px;
+    font-size: 13px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 6px 15px;
+    padding: 5px 15px;
     border-radius: 20px;
-    z-index: 100;
     border: 1px solid rgba(245, 230, 209, 0.3);
-    white-space: nowrap;
-    text-align: center;
+    z-index: 30;
 }
 
-#count { color: #ffd700; font-weight: bold; min-width: 55px; display: inline-block; font-variant-numeric: tabular-nums; }
+#count { color: #ffd700; font-weight: bold; font-variant-numeric: tabular-nums; }
 
-/* قسم المدخلات في الأسفل */
+/* منطقة المدخلات في الأسفل */
 #inputSection {
     position: absolute;
     bottom: 40px;
@@ -124,7 +113,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 #userName {
@@ -133,14 +121,13 @@ body {
     border-radius: 10px;
     border: none;
     text-align: center;
-    outline: none;
-    font-family: 'Almarai', sans-serif;
+    font-family: 'Almarai';
+    margin-bottom: 10px;
 }
 
 #createBtn {
-    margin-top: 10px;
     width: 80%;
-    padding: 13px;
+    padding: 12px;
     border-radius: 12px;
     background: #25D366;
     color: white;
@@ -150,21 +137,19 @@ body {
     font-size: 16px;
 }
 
-/* زينة اللمبات */
+/* الزينة والأنيميشن */
 .lights-string {
     position: absolute;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    z-index: 50;
+    padding: 8px 0;
 }
 
-.lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
-@keyframes blink { from { opacity: 0.3; } to { opacity: 1; filter: drop-shadow(0 0 8px gold); } }
+.lights-string span { font-size: 18px; animation: blink 1.5s infinite alternate; }
+@keyframes blink { from { opacity: 0.4; } to { opacity: 1; } }
 
-/* الأهلة المتساقطة */
-#crescent-container { position: absolute; width: 100%; height: 100%; pointer-events: none; top: 0; left: 0; }
-.crescent { position: absolute; top: -20px; font-size: 20px; animation: fall linear forwards; }
+#crescent-container { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+.crescent { position: absolute; font-size: 20px; animation: fall linear forwards; }
 @keyframes fall { to { transform: translateY(640px) rotate(360deg); opacity: 0; } }
