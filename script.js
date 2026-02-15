@@ -1,18 +1,37 @@
+// --- إعدادات الصوت ---
 const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicControl");
 const musicIcon = document.getElementById("musicIcon");
 
 function toggleMusic() {
     if (bgMusic.paused) {
-        bgMusic.play();
+        bgMusic.play().catch(() => console.log("تفاعل مع الصفحة لتشغيل الصوت"));
         musicIcon.textContent = "🔊 إيقاف الصوت";
     } else {
         bgMusic.pause();
         musicIcon.textContent = "👈 اضغط لتشغيل أجواء رمضان 🌙";
     }
 }
-musicBtn.addEventListener("click", toggleMusic);
+if (musicBtn) musicBtn.addEventListener("click", toggleMusic);
 
+// --- العداد الذكي (موحد لجميع الزوار) ---
+function updateCounter() {
+    // تاريخ انطلاق الموقع (سنة، شهر-1، يوم) -> شهر 1 يعني فبراير
+    const startDate = new Date(2026, 1, 1).getTime(); 
+    const now = new Date().getTime();
+    const secondsPassed = Math.floor((now - startDate) / 1000);
+    
+    // رقم البداية + زيادة تلقائية (3 زيارات كل ثانية)
+    let totalVisits = 144250 + (secondsPassed * 3);
+    
+    const countElement = document.getElementById('count');
+    if (countElement) {
+        countElement.innerText = totalVisits.toLocaleString();
+    }
+}
+setInterval(updateCounter, 1000);
+
+// --- تهيئة الصفحة والأسماء ---
 function initializePage() {
     const params = new URLSearchParams(window.location.search);
     const fromName = params.get("from");
@@ -23,40 +42,34 @@ function initializePage() {
 
     if (toName) {
         const cleanTo = toName.replace(/-/g, ' ');
-        nameInCircle.textContent = `${cleanTo}`;
+        nameInCircle.textContent = `🌙 ${cleanTo} 🌙`;
+        // تحديث عنوان التبويب في المتصفح لزيادة التفاعل والـ SEO
+        document.title = `تهنئة خاصة إلى ${cleanTo} 🌙`;
     } else {
-        nameInCircle.textContent = "رمضان كريم";
+        nameInCircle.textContent = "🌙 رمضان كريم 🌙";
     }
 
     if (fromName) {
         const cleanFrom = fromName.replace(/-/g, ' ');
-        fromText.textContent = `مني أنا ${cleanFrom} إلى`;
-    } else {
-        fromText.textContent = "";
+        if (fromText) fromText.textContent = `مني أنا ${cleanFrom} إلى`;
     }
 
-    let startValue = 144250;
-    let currentVisits = localStorage.getItem('visitCount');
-    if (!currentVisits) currentVisits = startValue;
-    else currentVisits = parseInt(currentVisits) + 1;
-
-    localStorage.setItem('visitCount', currentVisits);
-    document.getElementById('count').innerText = parseInt(currentVisits).toLocaleString();
-
-    setInterval(() => {
-        currentVisits = parseInt(currentVisits) + 1;
-        document.getElementById('count').innerText = currentVisits.toLocaleString();
-    }, 5000);
+    updateCounter();
 }
 window.onload = initializePage;
 
+// --- نظام إنشاء ومشاركة الرابط ---
 document.getElementById("createBtn").addEventListener("click", function() {
     const input = document.getElementById("userName");
     const params = new URLSearchParams(window.location.search);
     
     let newTo = input.value.trim();
-    if (!newTo) { alert("اكتب اسم الشخص الذي تريد تهنئته"); return; }
+    if (!newTo) { 
+        alert("لطفاً، اكتب اسم الشخص الذي تريد تهنئته"); 
+        return; 
+    }
 
+    // المنطق: المستلم الحالي يصبح هو المرسل في الرابط الجديد
     let currentSender = params.get("to") || "محب"; 
     
     const cleanFrom = currentSender.replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
@@ -68,6 +81,7 @@ document.getElementById("createBtn").addEventListener("click", function() {
     window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
 });
 
+// --- تأثير تساقط الأهلة ---
 function createCrescent() {
     const container = document.getElementById('crescent-container');
     if (!container) return;
