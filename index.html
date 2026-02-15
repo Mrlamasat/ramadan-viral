@@ -7,6 +7,9 @@
 <meta name="description" content="صمم بطاقة تهنئة رمضان بالاسم مجاناً وشاركها مع أحبائك.">
 <meta name="keywords" content="تهنئة رمضان, بطاقة معايدة رمضان, رمضان بالاسم, تهاني رمضان, تصميم بطاقة رمضان">
 
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+
 <!-- OG / Social Media -->
 <meta property="og:title" content="تهنئة رمضان">
 <meta property="og:description" content="صمم بطاقة تهنئة رمضان بالاسم مجاناً وشاركها مع أحبائك.">
@@ -22,22 +25,27 @@
 <div id="cardContainer">
     <div id="crescent-container"></div>
 
+    <!-- زر الموسيقى -->
     <div id="musicControl" class="music-btn-top-area">
         <span id="musicIcon">👈 اضغط لتشغيل أجواء رمضان 🌙</span>
     </div>
 
+    <!-- الدائرة الرئيسية -->
     <div class="circle-wrapper">
         <div class="circle">
             <h1 id="titleText" class="auto-font">🎁 تهنئة رمضان</h1>
-            <h2 id="nameInCircle" class="auto-font">🌙 رمضان كريم 🌙</h2>
+            <div id="fromText" class="auto-font"></div>
+            <h2 id="nameInCircle" class="auto-font"></h2>
             <p id="viralHint" class="auto-font">🔥 أرسل البطاقة الآن لأحبائك!</p>
         </div>
     </div>
 
+    <!-- عداد الزوار -->
     <div class="visitor-counter">
         شاهده الآن: <span id="count">144,250</span> شخص
     </div>
 
+    <!-- إدخال اسم الشخص التالي -->
     <div id="inputSection">
         <input type="text" id="userName" placeholder="اكتب اسم الشخص التالي">
         <button id="createBtn">أرسلها الآن 📲</button>
