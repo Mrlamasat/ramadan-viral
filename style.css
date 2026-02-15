@@ -82,6 +82,19 @@ body {
 
 #viralHint { font-size: 0.9em; opacity: 0.9; }
 
+/* الاسم المتغير داخل الدائرة أكبر وتوهج ذهبي */
+#nameInCircle {
+    font-size: 2.5em;          /* أكبر حجم */
+    font-weight: 900;          /* عريض جدًا */
+    color: #ffffff;
+    text-shadow: 
+        0 0 5px #ffd700,
+        0 0 10px #ffd700,
+        0 0 15px #ffd700,
+        0 0 20px #ffd700;
+    margin: 5px 0;
+}
+
 .visitor-counter {
     position: absolute;
     top: 51%;
