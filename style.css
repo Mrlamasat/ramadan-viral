@@ -1,7 +1,7 @@
 :root {
     --gold: #f5e6d1;
     --dark: #1a1a1a;
-    --beige: #f5f5dc;
+    --beige: #f5f5dc; /* اللون البيج المطلوب */
     --whatsapp-green: #25D366;
 }
 
@@ -29,7 +29,7 @@ body {
     overflow: hidden;
 }
 
-/* 1. رفع زر تشغيل الصوت قليلًا (من 20px إلى 10px) */
+/* زر تشغيل الصوت (مرفوع) */
 .music-btn-top-area {
     position: absolute;
     top: 10px; 
@@ -47,7 +47,7 @@ body {
     white-space: nowrap;
 }
 
-/* 2. رفع الدائرة مع النص (تعديل الـ top من 32% إلى 28%) */
+/* الدائرة المركزية (مرفوعة) */
 .circle-wrapper {
     position: absolute;
     top: 28%; 
@@ -72,6 +72,20 @@ body {
     box-sizing: border-box;
 }
 
+/* تنسيق النصوص باللون البيج المطلوب */
+.auto-font, #titleText, #fromText, #nameInCircle, #viralHint {
+    color: var(--beige) !important;
+    margin: 4px 0;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+#viralHint {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* الاسم المتوهج (يبقى أبيض لليبرز مع التوهج) */
 .glowing-name {
     font-size: 2.2em;
     font-weight: 900;
@@ -80,7 +94,7 @@ body {
     margin: 5px 0;
 }
 
-/* 3. رفع زر "شاهده الآن" (تعديل الـ top من 55% إلى 51%) */
+/* عداد الزيارات (مرفوع) */
 .visitor-counter {
     position: absolute;
     top: 51%; 
@@ -101,7 +115,7 @@ body {
     font-weight: bold;
 }
 
-/* منطقة المدخلات تبقى في مكانها لتسهيل الكتابة */
+/* منطقة المدخلات */
 #inputSection {
     position: absolute;
     bottom: 40px;
@@ -117,6 +131,7 @@ body {
     border-radius: 10px;
     border: none;
     text-align: center;
+    font-family: 'Almarai';
 }
 
 #createBtn {
@@ -129,8 +144,10 @@ body {
     border: none;
     font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
 }
 
+/* الزينة */
 .lights-string {
     position: absolute;
     top: 0;
