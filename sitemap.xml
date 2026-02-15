@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
     <loc>https://ramadan-viral.vercel.app/</loc>
-    <lastmod>2026-02-14</lastmod>
-    <changefreq>always</changefreq>
+    <lastmod>2026-02-15</lastmod>
+    <changefreq>hourly</changefreq>
     <priority>1.0</priority>
-    <news:news>
-      <news:publication>
-        <news:name>رمضان فيرال</news:name>
-        <news:language>ar</news:language>
-      </news:publication>
-      <news:publication_date>2026-02-14T23:30:00+03:00</news:publication_date>
-      <news:title>أداة تهنئة رمضان 2026 بالأسماء - اصنع بطاقتك الآن</news:title>
-    </news:news>
   </url>
 </urlset>
