@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden; /* يمنع أي تمرير ويحافظ على شكل التطبيق */
+    overflow: hidden; 
 }
 
 #cardContainer {
@@ -21,6 +21,7 @@ body {
     border-radius: 20px;
     background: url('https://i.imgur.com/4tD90fX.jpeg') center/cover no-repeat;
     z-index: 10;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* إضافة ظل خفيف ليعطي عمق للبطاقة */
 }
 
 .circle-wrapper {
@@ -65,7 +66,7 @@ body {
 
 .music-btn-top-area {
     position: absolute;
-    top: 15px; /* تم تعديله ليكون داخل البطاقة بشكل صحيح */
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 15px;
@@ -76,7 +77,10 @@ body {
     cursor: pointer;
     z-index: 100;
     font-size: 12px;
+    transition: all 0.3s ease;
 }
+
+.music-btn-top-area:hover { background: rgba(75, 42, 17, 1); transform: translateX(-50%) scale(1.05); }
 
 #inputSection {
     position: absolute;
@@ -84,8 +88,17 @@ body {
     text-align: center;
 }
 
-#userName { width: 80%; padding: 12px; border-radius: 10px; border: none; text-align: center; font-family: 'Almarai'; }
-#createBtn { margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; background: #25D366; color: white; border: none; cursor: pointer; font-weight: bold; }
+#userName { 
+    width: 80%; padding: 12px; border-radius: 10px; border: none; 
+    text-align: center; font-family: 'Almarai'; outline: none;
+}
+
+#createBtn { 
+    margin-top: 10px; width: 80%; padding: 12px; border-radius: 12px; 
+    background: #25D366; color: white; border: none; cursor: pointer; 
+    font-weight: bold; transition: background 0.3s;
+}
+#createBtn:hover { background: #128C7E; }
 
 .lights-string { position: absolute; top: 0; width: 100%; display: flex; justify-content: space-around; padding: 10px 0; }
 .lights-string span { font-size: 20px; animation: blink 1.5s infinite alternate; }
@@ -93,7 +106,7 @@ body {
 
 .visitor-counter {
     position: absolute;
-    top: 60px; /* تم تعديله ليكون تحت اللمبات مباشرة */
+    top: 60px;
     left: 50%;
     transform: translateX(-50%);
     color: #f5f5dc;
@@ -103,9 +116,17 @@ body {
     border-radius: 20px;
     z-index: 100;
     border: 1px solid rgba(245, 230, 209, 0.3);
+    white-space: nowrap; /* يمنع نزول الرقم لسطر جديد */
 }
 
-/* أنيميشن الأهلة المتساقطة */
+/* تعديل العداد ليصبح ثابتاً عند تغير الأرقام */
+#count {
+    display: inline-block;
+    min-width: 50px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
 #crescent-container { position: absolute; width: 100%; height: 100%; pointer-events: none; }
 .crescent { position: absolute; top: -20px; font-size: 20px; animation: fall linear forwards; }
 @keyframes fall { to { transform: translateY(640px) rotate(360deg); opacity: 0; } }
