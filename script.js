@@ -19,23 +19,26 @@ function initializePage() {
     const toName = params.get("to");
     
     const fromText = document.getElementById("fromText");
-    const toNameGlow = document.getElementById("toNameGlow");
+    const nameInCircle = document.getElementById("nameInCircle");
 
-    if (fromName && toName) {
-        const cleanFrom = fromName.replace(/-/g, ' ');
+    if (toName) {
         const cleanTo = toName.replace(/-/g, ' ');
-        fromText.textContent = `مني أنا ${cleanFrom} إلى`;
-        toNameGlow.textContent = cleanTo;
+        nameInCircle.textContent = `🌙 ${cleanTo} 🌙`;
     } else {
-        fromText.textContent = "تهنئة رمضان خاصة";
-        toNameGlow.textContent = "لك ولأحبابك";
+        nameInCircle.textContent = "🌙 رمضان كريم 🌙";
+    }
+
+    if (fromName) {
+        const cleanFrom = fromName.replace(/-/g, ' ');
+        fromText.textContent = `مني أنا ${cleanFrom} إلى`;
+    } else {
+        fromText.textContent = "";
     }
 
     let startValue = 144250;
     let currentVisits = localStorage.getItem('visitCount');
-
-    if (!currentVisits) { currentVisits = startValue; }
-    else { currentVisits = parseInt(currentVisits) + 1; }
+    if (!currentVisits) currentVisits = startValue;
+    else currentVisits = parseInt(currentVisits) + 1;
 
     localStorage.setItem('visitCount', currentVisits);
     document.getElementById('count').innerText = parseInt(currentVisits).toLocaleString();
